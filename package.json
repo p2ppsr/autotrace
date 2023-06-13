@@ -32,6 +32,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "babbage-kvstore": "^1.1.5",
     "dotenv": "^8.2.0"
   }
 }

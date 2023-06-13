@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 
+import { get, set, remove } from 'babbage-kvstore'
 import { Vehicle } from "./models/Vehicle";
+import { ATDocument } from './models/ATDocument';
 
 /**
  * A system for tracing vehicle history
@@ -15,6 +17,13 @@ export class AutoTrace {
    */
   register (vehicle: Vehicle): void {
     // Use kvstore set
+    const repairsDoc = new ATDocument(
+      'Repairs',
+      'auto_work_agreement',
+      'Repairs needed on my car...',
+      '...'
+    )
+    set(vehicle.vin, JSON.stringify(repairsDoc))
   }
 
   /**
@@ -24,7 +33,7 @@ export class AutoTrace {
   trace (vin: string): Vehicle {
 
     // TODO: Use kvstore get
-    let matchingVehicle = new Vehicle('Nissan', 'Titan','gray', 'someVINNumber')
+    const matchingVehicle = new Vehicle('Nissan', 'Versa','gray', 'someVINNumber')
     return matchingVehicle
   }
 

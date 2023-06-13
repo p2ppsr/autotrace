@@ -2,6 +2,7 @@
  * Represents an AutoTrace vehicle
  */
 export class Vehicle {
+  vin: string
   make: string
   model: string
   color: string
@@ -15,7 +16,7 @@ export class Vehicle {
    * @param {string} color - The color of the vehicle.
    */
   constructor(vin: string, make: string, model: string, color: string) {
-    this.vin
+    this.vin = vin
     this.make = make
     this.model = model
     this.color = color
