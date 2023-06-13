@@ -6,9 +6,8 @@ import { Vehicle } from '../src/models/Vehicle'
 describe('AutoTrace general use tests', ()=> {
     
     const autoTrace = new AutoTrace()
-    const VIN = '4A3AJ56G8WE042175'
+    const VIN = '4A3AJ56G8WE042176'
     const newCar = new Vehicle(
-        VIN,
         'Toyota',
         'Camry',
         '2021',

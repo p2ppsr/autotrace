@@ -40,7 +40,7 @@ export class AutoTrace {
   /**
    * Transfers the ownership of a vehicle
    */
-  async transfer (VIN: string, vehicle: Vehicle, recipient: string): Promise<void> {
+  async transfer (VIN: string, recipient: string): Promise<void> {
     const registrationHistory = await this.trace(VIN)
     await set(VIN, registrationHistory, {
       moveFromSelf: true,
