@@ -7,6 +7,10 @@ export class Owner {
     name: string
     vehicles: Vehicle[]
   
+    /**
+     * @constructor
+     * @param {string} name name of the current user
+     */
     constructor(name: string) {
       this.name = name
       this.vehicles = []
