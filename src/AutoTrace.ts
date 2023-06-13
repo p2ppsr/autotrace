@@ -8,6 +8,7 @@ import { Registration } from './models/Registration';
 
 /**
  * A system for tracing vehicle history
+ * @public
  */
 export class AutoTrace {
   constructor () {
@@ -15,6 +16,10 @@ export class AutoTrace {
 
   /**
    * Registers a new event
+   * @param {string} VIN - VIN Number of vehicle to register
+   * @param {Vehicle} vehicle - vehicle info to register
+   * @param {ATEvent} event - event to register for this vehicle
+   * @public
    */
   async register (VIN: string, vehicle: Vehicle, event: ATEvent): Promise<void> {
     const registrationHistory = await this.trace(VIN)
@@ -29,7 +34,7 @@ export class AutoTrace {
 
   /**
    * Traces the registration history of a vehicle
-   * @param {string} VIN VIN number of vehicle
+   * @param {string} VIN - VIN number of vehicle
    */
   async trace (VIN: string): Promise<Registration> {
     // Use kvstore get to retrieve the registration history of a vehicle
@@ -39,6 +44,9 @@ export class AutoTrace {
 
   /**
    * Transfers the ownership of a vehicle
+   * @param {string} VIN - VIN number of vehicle
+   * @param {string} recipient - the recipient to transfer the vehicle to
+   * @public
    */
   async transfer (VIN: string, recipient: string): Promise<void> {
     const registrationHistory = await this.trace(VIN)
@@ -50,6 +58,9 @@ export class AutoTrace {
 
   /**
    * Receives an incoming transfer request
+   * @param {string} VIN - VIN number of vehicle
+   * @param {string} sender - the sender of the vehicle to receive
+   * @public
    */
   async receive (VIN: string, sender: string,): Promise<void> {
     const registrationHistory = await this.trace(VIN)
@@ -61,6 +72,8 @@ export class AutoTrace {
 
   /**
    * Decommissions a vehicle no longer needs to be traced.
+   * @param {string} VIN - VIN number of vehicle
+   * @public
    */
   async decommission (VIN: string) {
     await remove(VIN)

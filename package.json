@@ -13,7 +13,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "standard --fix src/**/*.js"
+    "lint": "standard --fix src/**/*.js",
+    "doc": "documentation readme src/AutoTrace.ts -f md -s API -a public"
   },
   "author": "Peer-to-peer Privacy Systems Research, LLC",
   "license": "Open BSV License",
@@ -33,6 +34,7 @@
   },
   "dependencies": {
     "babbage-kvstore": "^1.1.5",
+    "documentation": "^14.0.2",
     "dotenv": "^8.2.0"
   }
 }
