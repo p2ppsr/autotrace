@@ -6,16 +6,17 @@ import { Vehicle } from '../src/models/Vehicle'
 describe('AutoTrace general use tests', ()=> {
     
     const autoTrace = new AutoTrace()
-    const VIN = '4A3AJ56G8WE042173'
+    const VIN = '4A3AJ56G8WE042175'
     const newCar = new Vehicle(
         VIN,
         'Toyota',
         'Camry',
+        '2021',
         'Silver'
     )
 
     it('Register a new event', async () => {
-        const event = new ATEvent('1', 'TitleRegistration', 'Car delivered to dealership', Date.now().toString(),'Document contents here...')
+        const event = new ATEvent(crypto.randomUUID(), 'TitleRegistration', 'Car delivered to dealership', Date.now().toString(),'Document contents here...')
         await autoTrace.register(VIN, newCar, event)
         expect(true)
     })
@@ -25,7 +26,7 @@ describe('AutoTrace general use tests', ()=> {
     })
 
     it('Register a maintenance event', async () => {
-        const event = new ATEvent('1', 'Maintenance', 'Car repairs done', Date.now().toString(),'Document contents here...')
+        const event = new ATEvent(crypto.randomUUID(), 'Maintenance', 'Car repairs done', Date.now().toString(),'Document contents here...')
         await autoTrace.register(VIN, newCar, event)
         expect(true)
     })

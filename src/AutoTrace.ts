@@ -17,17 +17,8 @@ export class AutoTrace {
    * Registers a new event
    */
   async register (VIN: string, vehicle: Vehicle, event: ATEvent): Promise<void> {
-    // Check for previous vehicle state using kvstore get() for now
-    // TODO: Get previous UTXOs to verify state.
-    const autoTrace = new AutoTrace()
-    let eventHistory:ATEvent[] = []
-    const carHistory = await autoTrace.trace(VIN)
-    
-    // Check if there is existing car history
-    if (carHistory) {
-      eventHistory = carHistory.events
-    }
-
+    const registrationHistory = await this.trace(VIN)
+    const eventHistory:ATEvent[] = registrationHistory ? registrationHistory.events : [] 
     // Add the new event to the history of events
     eventHistory.push(event)
 
@@ -37,27 +28,41 @@ export class AutoTrace {
   }
 
   /**
-   * Traces the history of a vehicle
-   * @param {string} vin VIN number of vehicle
+   * Traces the registration history of a vehicle
+   * @param {string} VIN VIN number of vehicle
    */
-  async trace (vin: string): Promise<Registration> {
-
-    // Use kvstore get to retrieve the history of a vehicle
-    const history = await get(vin)
-    return JSON.parse(history)
+  async trace (VIN: string): Promise<Registration> {
+    // Use kvstore get to retrieve the registration history of a vehicle
+    const history = await get(VIN)
+    return history ? JSON.parse(history) : undefined
   }
 
   /**
    * Transfers the ownership of a vehicle
    */
-  transfer (vehicle: Vehicle, recipient: string): void {
-    // TODO: use kvstore set
+  async transfer (VIN: string, vehicle: Vehicle, recipient: string): Promise<void> {
+    const registrationHistory = await this.trace(VIN)
+    await set(VIN, registrationHistory, {
+      moveFromSelf: true,
+      counterparty: recipient
+    })
   }
 
   /**
    * Receives an incoming transfer request
    */
-  receive (sender: '', vehicle: Vehicle): void {
-    // TODO: use kvstore set?
+  async receive (VIN: string, sender: string,): Promise<void> {
+    const registrationHistory = await this.trace(VIN)
+    await set(VIN, registrationHistory, {
+      moveToSelf: true,
+      counterparty: sender
+    })
+  }
+
+  /**
+   * Decommissions a vehicle no longer needs to be traced.
+   */
+  async decommission (VIN: string) {
+    await remove(VIN)
   }
 }
