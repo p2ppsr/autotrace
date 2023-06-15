@@ -6,7 +6,7 @@ import { Vehicle } from '../src/models/Vehicle'
 describe('AutoTrace general use tests', ()=> {
     
     const autoTrace = new AutoTrace()
-    const VIN = '4A3AJ56G8WE0421779'
+    const VIN = '4A3AJ56G8WE0421781'
     const car = new Vehicle(
         'Toyota',
         'Accord',
@@ -31,7 +31,7 @@ describe('AutoTrace general use tests', ()=> {
     })
 
     it('Transfers ownership of a vehicle', async () => {
-        const recipient = '022a70d2862aeb01ecf3014395cec93a2390e3e9d80aecc9bbbbde5ddbd2a3d283'
+        const recipient = '0238ff27623e15caeae025a7a73e8dc29474e5fb14127e0996ce1658981a2f877e'
         const transferEvent = new ATEvent(crypto.randomUUID(), 'Transfer', 'Title Transfer', Date.now().toString(),'Document contents here...')
         await autoTrace.transfer(VIN, recipient, transferEvent)
         expect(true)

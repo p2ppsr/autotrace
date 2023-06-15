@@ -51,7 +51,7 @@ export class AutoTrace {
   async transfer (VIN: string, recipient: string, transferEvent: ATEvent): Promise<void> {
     const registrationHistory = await this.trace(VIN)
     registrationHistory.events.push(transferEvent)
-    await set(VIN, registrationHistory, {
+    await set(VIN, JSON.stringify(registrationHistory), {
       moveFromSelf: true,
       counterparty: recipient
     })
@@ -65,7 +65,7 @@ export class AutoTrace {
    */
   async receive (VIN: string, sender: string,): Promise<void> {
     const registrationHistory = await this.trace(VIN)
-    await set(VIN, registrationHistory, {
+    await set(VIN, JSON.stringify(registrationHistory), {
       moveToSelf: true,
       counterparty: sender
     })
