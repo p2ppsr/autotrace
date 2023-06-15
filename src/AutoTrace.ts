@@ -48,8 +48,9 @@ export class AutoTrace {
    * @param {string} recipient - the recipient to transfer the vehicle to
    * @public
    */
-  async transfer (VIN: string, recipient: string): Promise<void> {
+  async transfer (VIN: string, recipient: string, transferEvent: ATEvent): Promise<void> {
     const registrationHistory = await this.trace(VIN)
+    registrationHistory.events.push(transferEvent)
     await set(VIN, registrationHistory, {
       moveFromSelf: true,
       counterparty: recipient
