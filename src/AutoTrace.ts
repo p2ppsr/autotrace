@@ -21,14 +21,14 @@ export class AutoTrace {
    * @param {ATEvent} event - event to register for this vehicle
    * @public
    */
-  async register (VIN: string, vehicle: Vehicle, event: ATEvent): Promise<void> {
+  async register (VIN: string, event: ATEvent, vehicle?: Vehicle): Promise<void> {
     const registrationHistory = await this.trace(VIN)
     const eventHistory:ATEvent[] = registrationHistory ? registrationHistory.events : [] 
     // Add the new event to the history of events
     eventHistory.push(event)
 
     // Create a new registration for this event on this vehicle
-    const registration = new Registration(vehicle, eventHistory)
+    const registration = new Registration(eventHistory, vehicle)
     await set(VIN, JSON.stringify(registration))
   }
 
@@ -52,8 +52,8 @@ export class AutoTrace {
     const registrationHistory = await this.trace(VIN)
     registrationHistory.events.push(transferEvent)
     await set(VIN, JSON.stringify(registrationHistory), {
-      moveFromSelf: true,
-      counterparty: recipient
+      counterparty: recipient,
+      sendToCounterparty: true
     })
   }
 

@@ -17,7 +17,7 @@
     "doc": "documentation readme src/AutoTrace.ts -f md -s API -a public"
   },
   "author": "Peer-to-peer Privacy Systems Research LLC",
-  "license": "PROPRIETARY",
+  "license": "Open BSV License",
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/node": "^18.13.0",
