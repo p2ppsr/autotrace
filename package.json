@@ -1,5 +1,5 @@
 {
-  "name": "@babbage/autotrace",
+  "name": "babbage-autotrace",
   "version": "0.1.0",
   "description": "System for managing car history tracking",
   "main": "./out/src/index.js",
