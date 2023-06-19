@@ -15,12 +15,14 @@ By integrating AutoTrace into your software, you can revolutionize the way your 
 *   [AutoTrace](#autotrace)
     *   [register](#register)
         *   [Parameters](#parameters)
-    *   [transfer](#transfer)
+    *   [trace](#trace)
         *   [Parameters](#parameters-1)
-    *   [receive](#receive)
+    *   [transfer](#transfer)
         *   [Parameters](#parameters-2)
-    *   [decommission](#decommission)
+    *   [receive](#receive)
         *   [Parameters](#parameters-3)
+    *   [decommission](#decommission)
+        *   [Parameters](#parameters-4)
 
 ### AutoTrace
 
@@ -33,10 +35,20 @@ Registers a new event
 ##### Parameters
 
 *   `VIN` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** VIN Number of vehicle to register
-*   `vehicle` **Vehicle** vehicle info to register
 *   `event` **ATEvent** event to register for this vehicle
+*   `vehicle` **Vehicle?** vehicle info to register
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<void>**&#x20;
+
+#### trace
+
+Traces the registration history of a vehicle
+
+##### Parameters
+
+*   `VIN` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** VIN number of vehicle
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<Registration>** the event history info associated with the given VIN
 
 #### transfer
 
@@ -46,6 +58,7 @@ Transfers the ownership of a vehicle
 
 *   `VIN` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** VIN number of vehicle
 *   `recipient` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the recipient to transfer the vehicle to
+*   `transferEvent` **ATEvent** the event info associated with the transfer
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<void>**&#x20;
 

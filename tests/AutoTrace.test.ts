@@ -3,8 +3,6 @@ import { AutoTrace } from '../src/AutoTrace'
 import { ATEvent } from '../src/models/ATEvent'
 import { Vehicle } from '../src/models/Vehicle'
 
-import {get, set} from 'babbage-kvstore'
-
 // Example Car to Trace
 const autoTrace = new AutoTrace()
 const VIN = '4A3AJ56G8WE0421783'
@@ -137,6 +135,13 @@ describe('Transferring token ownership', () => {
         await autoTrace.transfer(VIN, '022a70d2862aeb01ecf3014395cec93a2390e3e9d80aecc9bbbbde5ddbd2a3d283', event)
     })
 })
+
+describe('Decommissioning a vehicle history token', () => {
+    it('Decommissions a vehicle history token by spending the UTXO and deleting the kvstore entry', async () => {
+        await autoTrace.decommission(VIN)
+    })
+})
+
 
 // Example token transfer code
 // it ('test kvstore', async () => {

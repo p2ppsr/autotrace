@@ -17,8 +17,8 @@ export class AutoTrace {
   /**
    * Registers a new event
    * @param {string} VIN - VIN Number of vehicle to register
-   * @param {Vehicle} vehicle - vehicle info to register
    * @param {ATEvent} event - event to register for this vehicle
+   * @param {Vehicle} [vehicle] - vehicle info to register
    * @public
    */
   async register (VIN: string, event: ATEvent, vehicle?: Vehicle): Promise<void> {
@@ -35,6 +35,8 @@ export class AutoTrace {
   /**
    * Traces the registration history of a vehicle
    * @param {string} VIN - VIN number of vehicle
+   * @returns {Promise<Registration>} - the event history info associated with the given VIN
+   * @public
    */
   async trace (VIN: string): Promise<Registration> {
     // Use kvstore get to retrieve the registration history of a vehicle
@@ -46,6 +48,7 @@ export class AutoTrace {
    * Transfers the ownership of a vehicle
    * @param {string} VIN - VIN number of vehicle
    * @param {string} recipient - the recipient to transfer the vehicle to
+   * @param {ATEvent} transferEvent - the event info associated with the transfer
    * @public
    */
   async transfer (VIN: string, recipient: string, transferEvent: ATEvent): Promise<void> {
@@ -66,8 +69,8 @@ export class AutoTrace {
   async receive (VIN: string, sender: string,): Promise<void> {
     const registrationHistory = await this.trace(VIN)
     await set(VIN, JSON.stringify(registrationHistory), {
-      moveToSelf: true,
-      counterparty: sender
+      counterparty: sender,
+      receiveFromCounterparty: true
     })
   }
 
