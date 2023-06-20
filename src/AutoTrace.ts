@@ -35,12 +35,13 @@ export class AutoTrace {
   /**
    * Traces the registration history of a vehicle
    * @param {string} VIN - VIN number of vehicle
+   * @param {string} [sender]
    * @returns {Promise<Registration>} - the event history info associated with the given VIN
    * @public
    */
-  async trace (VIN: string): Promise<Registration> {
+  async trace (VIN: string, sender?: string): Promise<Registration> {
     // Use kvstore get to retrieve the registration history of a vehicle
-    const history = await get(VIN)
+    const history = await get(VIN, undefined, { counterparty: sender })
     return history ? JSON.parse(history) : undefined
   }
 
@@ -67,7 +68,8 @@ export class AutoTrace {
    * @public
    */
   async receive (VIN: string, sender: string,): Promise<void> {
-    const registrationHistory = await this.trace(VIN)
+    // Should always have a history when receiving
+    const registrationHistory = await this.trace(VIN, sender)
     await set(VIN, JSON.stringify(registrationHistory), {
       counterparty: sender,
       receiveFromCounterparty: true
