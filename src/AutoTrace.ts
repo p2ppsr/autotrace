@@ -35,7 +35,7 @@ export class AutoTrace {
   /**
    * Traces the registration history of a vehicle
    * @param {string} VIN - VIN number of vehicle
-   * @param {string} [sender]
+   * @param {string} [sender] - identity associated with the vehicle
    * @returns {Promise<Registration>} - the event history info associated with the given VIN
    * @public
    */
