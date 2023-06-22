@@ -1,5 +1,5 @@
 {
-  "name": "babbage-autotrace",
+  "name": "@cwi/autotrace",
   "version": "0.1.4",
   "description": "System for managing car history tracking",
   "main": "./out/src/index.js",
@@ -16,8 +16,11 @@
     "lint": "standard --fix src/**/*.js",
     "doc": "documentation readme src/AutoTrace.ts -f md -s API -a public"
   },
-  "author": "Peer-to-peer Privacy Systems Research LLC",
-  "license": "Open BSV License",
+  "publishConfig": {
+    "registry": "https://npm-registry.babbage.systems/"
+  },
+  "author": "Peer-to-peer Privacy Systems Research, LLC",
+  "license": "PROPRIETARY",
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/node": "^18.13.0",
