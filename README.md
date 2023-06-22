@@ -1,10 +1,48 @@
 # autotrace
 
-Are you a business looking to incorporate a powerful and transparent vehicle history tracking feature into your software? Look no further than AutoTrace. This groundbreaking package harnesses the power of the BSV blockchain to provide a comprehensive solution for tracking a vehicle's complete history.
+AutoTrace is a comprehensive package that enables powerful and transparent vehicle history tracking by leveraging the BSV blockchain. It provides a cutting-edge solution for recording and accessing a vehicle's complete history, ensuring integrity and reliability of information.
 
-AutoTrace covers all the crucial aspects of a vehicle's story, including accident reports, maintenance records, ownership history, and mileage verification. By leveraging the secure and immutable nature of blockchain technology, AutoTrace ensures the integrity and reliability of information, instilling confidence and trust in the vehicle's history.
+## Installation
 
-By integrating AutoTrace into your software, you can revolutionize the way your users explore and evaluate vehicle histories. Empower them with transparent and trustworthy information, enabling them to make well-informed decisions. Experience AutoTrace today and unlock the power of discovering the complete vehicle story on the blockchain. Transform the way your business understands and evaluates vehicles, and provide your users with a cutting-edge solution they can rely on.
+You can install AutoTrace package if you have been given access using npm:
+
+```bash
+npm i @cwi/autotrace
+```
+
+## Example Usage
+
+```javascript
+import { AutoTrace, ATEvent } from '@cwi/autotrace'
+
+// Create a new AutoTrace instance
+const autoTrace = new AutoTrace()
+
+const VIN = 'KNAGM4A73E5467099'
+
+// Your registration document
+const registrationDoc = {
+    make,
+    model,
+    year,
+    color
+}
+
+// Create a new event
+const event = new ATEvent(
+    crypto.randomUUID(),
+    'TitleRegistration',
+    'Register a new vehicle',
+    Date.now().toString(),
+    JSON.stringify(registrationDoc)
+)
+
+// Register a new event for the vehicle
+await autoTrace.register(VIN, event, registrationDoc)
+
+// Access vehicle history data
+const vehicleHistory = await autotrace.trace(VIN);
+```
 
 ## API
 
@@ -47,6 +85,7 @@ Traces the registration history of a vehicle
 ##### Parameters
 
 *   `VIN` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** VIN number of vehicle
+*   `sender` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** identity associated with the vehicle
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<Registration>** the event history info associated with the given VIN
 
