@@ -38,7 +38,7 @@ const event = new ATEvent(
 )
 
 // Register a new event for the vehicle
-await autoTrace.register(VIN, event, registrationDoc)
+await autoTrace.register(VIN, event)
 
 // Access vehicle history data
 const vehicleHistory = await autotrace.trace(VIN);
