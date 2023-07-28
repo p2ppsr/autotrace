@@ -1,6 +1,6 @@
 {
   "name": "@cwi/autotrace",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "System for managing car history tracking",
   "main": "./out/src/index.js",
   "types": "./out/src/index.d.ts",
