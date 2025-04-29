@@ -1,6 +1,8 @@
-# autotrace
+# AutoTrace
 
 AutoTrace is a comprehensive package that enables powerful and transparent vehicle history tracking by leveraging the BSV blockchain. It provides a cutting-edge solution for recording and accessing a vehicle's complete history, ensuring integrity and reliability of information.
+
+![](./AutoTrace.png)
 
 ## Installation
 
